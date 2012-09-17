@@ -1,9 +1,8 @@
-/**
- * Created with IntelliJ IDEA.
- * User: dell
- * Date: 9/16/12
- * Time: 3:04 PM
- * To change this template use File | Settings | File Templates.
- */
-public class UserStub {
+public class UserStub extends User {
+    public UserStub(String userName, String address, int phoneNo, String openingDate) {
+        super(userName, address, phoneNo, openingDate);
+    }
+    public boolean matches(UserStub user) {
+        return true;
+    }
 }
