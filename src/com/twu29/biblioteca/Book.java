@@ -1,4 +1,6 @@
-public class Book {
+package com.twu29.biblioteca;
+
+public class Book implements BookSchema {
     private String title;
     private String author;
     private String ISBN;
@@ -13,14 +15,12 @@ public class Book {
         return title;
     }
 
-    public String setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this.title;
     }
 
-    public String setAuthor(String author) {
+    public void setAuthor(String author) {
         this.author = author;
-        return this.author;
     }
 
     public String getAuthor() {
@@ -28,16 +28,15 @@ public class Book {
     }
 
 
-    public String setISBN(String ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
-        return this.ISBN;
     }
 
     public String getISBN() {
         return ISBN;
     }
 
-    public boolean matches(Book book) {
+    public boolean matches(BookSchema book) {
         if(title != book.getTitle())
             return false;
         if((author != null) && (author != book.getAuthor()))

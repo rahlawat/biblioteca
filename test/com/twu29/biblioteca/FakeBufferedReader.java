@@ -1,3 +1,5 @@
+package com.twu29.biblioteca;
+
 import java.io.BufferedReader;
 import java.io.Reader;
 
@@ -6,6 +8,6 @@ public class FakeBufferedReader extends BufferedReader {
         super(in);
     }
     public String readLine(){
-        return "Reserve";
+        return "1";
     }
 }

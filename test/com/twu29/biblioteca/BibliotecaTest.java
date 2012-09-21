@@ -1,7 +1,7 @@
+package com.twu29.biblioteca;
+
 import junit.framework.Assert;
 import org.junit.Test;
-
-import java.util.LinkedList;
 
 public class BibliotecaTest {
     @Test
@@ -47,5 +47,13 @@ public class BibliotecaTest {
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.addUser(userStub);
         Assert.assertEquals(userStub,biblioteca.searchUser(userStub));
+    }
+
+    @Test
+    public void testprintBookLog() throws Exception {
+        BookLogStub bookLogStub = new BookLogStub();
+        Biblioteca biblioteca = new Biblioteca();
+       //biblioteca.addBookLog(bookLogStub);
+        Assert.assertEquals(true,biblioteca.printBookLog());
     }
 }

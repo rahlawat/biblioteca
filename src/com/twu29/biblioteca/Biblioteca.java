@@ -1,24 +1,26 @@
+package com.twu29.biblioteca;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Biblioteca {
-    private List<BooksLogs> booksLogsList;
-    private List<ReservedBooks> reservedBooksList;
+    private List<BookLogSchema> bookLogList;
+    private List<ReservedBookSchema> reservedBooksList;
     private List<User> userList;
 
     public Biblioteca(){
-        booksLogsList = new LinkedList<BooksLogs>();
-        reservedBooksList = new LinkedList<ReservedBooks>();
+        bookLogList = new LinkedList<BookLogSchema>();
+        reservedBooksList = new LinkedList<ReservedBookSchema>();
         userList = new LinkedList<User>();
     }
 
-    public boolean addBookLog(BooksLogs booksLogs) {
-       this.booksLogsList.add(booksLogs);
+    public boolean addBookLog(BookLogSchema booksLogs) {
+       this.bookLogList.add(booksLogs);
         return true;
     }
 
-    public boolean addReservedBook(ReservedBooks reservedBooks) {
+    public boolean addReservedBook(ReservedBookSchema reservedBooks) {
         this.reservedBooksList.add(reservedBooks);
         return true;  //To change body of created methods use File | Settings | File Templates.
     }
@@ -29,20 +31,20 @@ public class Biblioteca {
         return true;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public BooksLogs searchBook(BooksLogs booksLogs) {
-         for(Iterator i = booksLogsList.iterator();i.hasNext();){
-             BooksLogs booksLogs1 = (BooksLogs)i.next();
+    public BookLogSchema searchBook(BookLogSchema booksLogs) {
+         for(Iterator i = bookLogList.iterator();i.hasNext();){
+             BookLogSchema booksLogs1 = (BookLogSchema)i.next();
              if(booksLogs.matches(booksLogs1))
                  return booksLogs1;
          }
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public ReservedBooks searchReservedBooks(ReservedBooks reservedBooks) {
+    public ReservedBookSchema searchReservedBooks(ReservedBookSchema reservedBooks) {
         List matchingReservedBooks = new LinkedList();
         for(Iterator i = reservedBooksList.iterator(); i.hasNext();)
         {
-            ReservedBooks reservedBooks1 = (ReservedBooks)i.next();
+            ReservedBookSchema reservedBooks1 = (ReservedBookSchema)i.next();
             if(reservedBooks.matches(reservedBooks1))  {
                 matchingReservedBooks.add(reservedBooks1);
                 return reservedBooks;
@@ -60,5 +62,14 @@ public class Biblioteca {
                 return user1;
         }
         return null;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public boolean printBookLog() {
+        for(Iterator i = bookLogList.iterator();i.hasNext();){
+          BookLogSchema bookLog = (BookLog)i.next();
+            Book book =   (Book)bookLog.getBook();
+            System.out.println("Name of Book: "+book.getTitle()+" Author: "+book.getAuthor()+ " ISBN: "+book.getISBN()+" Total Books: "+bookLog.getTotalCopies()+" Books Available: "+bookLog.getUnreservedCopies());
+        }
+        return true;  //To change body of created methods use File | Settings | File Templates.
     }
 }

@@ -1,6 +1,4 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package com.twu29.biblioteca;
 
 public class User {
     private String userName;
@@ -15,36 +13,32 @@ public class User {
        this.openingDate = openingDate;
     }
 
-    public String setName(String name) {
+    public void setName(String name) {
         this.userName = name;
-        return this.userName;
     }
 
     public String getName() {
         return userName;
     }
 
-    public String setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
-        return this.address;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public int setPhoneNo(int phoneNo) {
+    public void setPhoneNo(int phoneNo) {
         this.phoneNo = phoneNo;
-        return this.phoneNo;
     }
 
     public int getPhoneNo() {
         return phoneNo;
     }
 
-    public String setOpeningDate(String openingDate) {
+    public void setOpeningDate(String openingDate) {
         this.openingDate = openingDate;
-        return this.openingDate;
     }
 
     public String getOpeningDate() {

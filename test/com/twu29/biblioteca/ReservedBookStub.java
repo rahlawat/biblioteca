@@ -1,7 +1,8 @@
-public class ReservedBookStub implements ReservedBooks {
+package com.twu29.biblioteca;
+
+public class ReservedBookStub implements ReservedBookSchema {
     @Override
-    public Book setBook(Book reservedBook) {
-        return  new Book("When The Light Fades","Kathy Rodgers","1-84223-247-9");
+    public void setBook(BookSchema reservedBook) {
     }
 
     @Override
@@ -10,8 +11,7 @@ public class ReservedBookStub implements ReservedBooks {
     }
 
     @Override
-    public User setUser(User user) {
-        return  new User("Renu Ahlawat","New Delhi",28011250,"01/21/2011");
+    public void setUser(User user) {
     }
 
     @Override
@@ -20,8 +20,7 @@ public class ReservedBookStub implements ReservedBooks {
     }
 
     @Override
-    public String setDateOfIssue(String dateOfIssue) {
-        return null;
+    public void setDateOfIssue(String dateOfIssue) {
     }
 
     @Override
@@ -30,8 +29,7 @@ public class ReservedBookStub implements ReservedBooks {
     }
 
     @Override
-    public String setLastDate(String lastDate) {
-        return null;
+    public void setLastDate(String lastDate) {
     }
 
     @Override
@@ -40,7 +38,7 @@ public class ReservedBookStub implements ReservedBooks {
     }
 
     @Override
-    public boolean matches(ReservedBooks reservedbook) {
+    public boolean matches(ReservedBookSchema reservedbook) {
         return true;
     }
 }

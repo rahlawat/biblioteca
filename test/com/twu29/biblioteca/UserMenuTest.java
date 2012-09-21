@@ -1,8 +1,12 @@
+package com.twu29.biblioteca;
+
 import junit.framework.Assert;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
 import org.junit.Test;
 
 public class UserMenuTest {
@@ -16,8 +20,9 @@ public class UserMenuTest {
         PrintStream ps = new PrintStream(os);
         System.setOut(ps);
         // Perform tests
-        capture.DisplayWelcomeNote("Welcome to Biblioteca.");
-        Assert.assertEquals("Welcome to Biblioteca.", os.toString());
+        capture.DisplayWelcomeNote();
+        String separator = System.getProperty("line.separator");
+        Assert.assertEquals("Welcome To Biblioteca"+separator, os.toString());
         // Restore normal operation
         System.setOut(originalOut);
     }
@@ -31,10 +36,10 @@ public class UserMenuTest {
         PrintStream ps = new PrintStream(os);
         System.setOut(ps);
         // Perform tests
+        capture.DisplayMenu();
         String separator = System.getProperty("line.separator");
-        capture.DisplayMenu("Search" + separator + "Reserve" + separator + "Return" + separator + "Contact");
-        Assert.assertEquals("Search"+separator+"Reserve"+separator+"Return"+separator+"Contact"+separator, os.toString());
-        // Restore normal operation
+        String ExpectedMatch = "1. List Of Books"+separator+"2. Reserve"+separator+"3. Contact"+separator;
+        Assert.assertEquals(ExpectedMatch, os.toString());
         System.setOut(originalOut);
     }
 
@@ -43,7 +48,7 @@ public class UserMenuTest {
         UserMenu userMenu;
        userMenu = new UserMenu();
         FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
-        Assert.assertEquals("Reserve",userMenu.getUserInput(fakeBufferedReader));
+        Assert.assertEquals("1",userMenu.getUserInput(fakeBufferedReader,""));
 
     }
 

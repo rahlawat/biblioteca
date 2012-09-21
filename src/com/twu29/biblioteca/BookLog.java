@@ -1,10 +1,12 @@
-public class BookLog implements BooksLogs {
+package com.twu29.biblioteca;
 
-    private Book book;
+public class BookLog implements BookLogSchema {
+
+    private BookSchema book;
     private int totalCopies;
     private int unreservedCopies;
 
-    public BookLog(Book book, int totalCopies, int unreservedCopies) {
+    public BookLog(BookSchema book, int totalCopies, int unreservedCopies) {
         this.book = book;
         this.totalCopies =totalCopies;
         this.unreservedCopies = unreservedCopies;
@@ -12,7 +14,7 @@ public class BookLog implements BooksLogs {
     }
 
 
-    public boolean matches(BooksLogs bookLog) {
+    public boolean matches(BookLogSchema bookLog) {
         if((book.matches(bookLog.getBook()) == false))
             return  false;
         if((totalCopies != 0) && (totalCopies != bookLog.getTotalCopies()))
@@ -22,27 +24,24 @@ public class BookLog implements BooksLogs {
         return true;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public Book getBook() {
+    public BookSchema getBook() {
         return book;
     }
 
-    public Book setBook(BookStub book) {
+    public void setBook(BookSchema book) {
         this.book = book;
-        return this.book;
     }
 
-    public int setTotalCopies(int totalCopies) {
+    public void setTotalCopies(int totalCopies) {
         this.totalCopies = totalCopies;
-        return this.totalCopies;
     }
 
     public int getTotalCopies() {
         return totalCopies;
     }
 
-    public int setUnreservedCopies(int unreservedCopies) {
+    public void setUnreservedCopies(int unreservedCopies) {
         this.unreservedCopies = unreservedCopies;
-        return this.unreservedCopies;
     }
 
     public int getUnreservedCopies() {
