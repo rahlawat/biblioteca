@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Biblioteca {
     private List<BookLogSchema> bookLogList;
-    private List<ReservedBookSchema> reservedBooksList;
     private List<User> userList;
+    private List<Movie> movieList;
 
     public Biblioteca(){
         bookLogList = new LinkedList<BookLogSchema>();
-        reservedBooksList = new LinkedList<ReservedBookSchema>();
         userList = new LinkedList<User>();
+        movieList = new LinkedList<Movie>();
     }
 
     public boolean addBookLog(BookLogSchema booksLogs) {
@@ -20,56 +20,47 @@ public class Biblioteca {
         return true;
     }
 
-    public boolean addReservedBook(ReservedBookSchema reservedBooks) {
-        this.reservedBooksList.add(reservedBooks);
-        return true;  //To change body of created methods use File | Settings | File Templates.
-    }
-
-
     public boolean addUser(User user) {
          this.userList.add(user);
         return true;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public BookLogSchema searchBook(BookLogSchema booksLogs) {
-         for(Iterator i = bookLogList.iterator();i.hasNext();){
-             BookLogSchema booksLogs1 = (BookLogSchema)i.next();
-             if(booksLogs.matches(booksLogs1))
-                 return booksLogs1;
-         }
-        return null;  //To change body of created methods use File | Settings | File Templates.
-    }
-
-    public ReservedBookSchema searchReservedBooks(ReservedBookSchema reservedBooks) {
-        List matchingReservedBooks = new LinkedList();
-        for(Iterator i = reservedBooksList.iterator(); i.hasNext();)
-        {
-            ReservedBookSchema reservedBooks1 = (ReservedBookSchema)i.next();
-            if(reservedBooks.matches(reservedBooks1))  {
-                matchingReservedBooks.add(reservedBooks1);
-                return reservedBooks;
-            }
-        }
-        return null;
-        //return matchingReservedBooks;  //To change body of created methods use File | Settings | File Templates.
+    public void searchBook(int userInput) {
+         if(userInput <= bookLogList.size())
+             System.out.println("Enjoy The Book.");
+        if(userInput > bookLogList.size())
+            System.out.println("Sorry we don't have that book yet.");
+          //To change body of created methods use File | Settings | File Templates.
     }
 
 
-    public User searchUser(User user) {
+    public boolean searchUser(User user) {
         for(Iterator i = userList.iterator();i.hasNext();){
             User user1 = (User)i.next();
             if(user.matches(user1))
-                return user1;
+                return true;
         }
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        return false;  //To change body of created methods use File | Settings | File Templates.
     }
 
     public boolean printBookLog() {
         for(Iterator i = bookLogList.iterator();i.hasNext();){
-          BookLogSchema bookLog = (BookLog)i.next();
-            Book book =   (Book)bookLog.getBook();
+          BookLogSchema bookLog = (BookLogSchema)i.next();
+            BookSchema book =   (BookSchema)bookLog.getBook();
             System.out.println("Name of Book: "+book.getTitle()+" Author: "+book.getAuthor()+ " ISBN: "+book.getISBN()+" Total Books: "+bookLog.getTotalCopies()+" Books Available: "+bookLog.getUnreservedCopies());
         }
         return true;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public boolean addMovie(Movie movie) {
+        this.movieList.add(movie);
+        return true;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public void printMovie() {
+        for(Iterator i = movieList.iterator();i.hasNext();){
+            Movie movie = (Movie)i.next();
+            System.out.println(movie.getMovieName()+"    "+movie.getMovieYear()+"    "+movie.getMovieDirector()+"    "+movie.getMovieRating() );
+        }
     }
 }

@@ -38,7 +38,7 @@ public class UserMenuTest {
         // Perform tests
         capture.DisplayMenu();
         String separator = System.getProperty("line.separator");
-        String ExpectedMatch = "1. List Of Books"+separator+"2. Reserve"+separator+"3. Contact"+separator;
+        String ExpectedMatch = "1. Login"+separator+"2. List Of Books"+separator+"3. Movie Catalog"+separator+"4. Contact"+separator;
         Assert.assertEquals(ExpectedMatch, os.toString());
         System.setOut(originalOut);
     }

@@ -3,8 +3,7 @@ package com.twu29.biblioteca;
 import junit.framework.Assert;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,8 +18,8 @@ public class BibliotecaProgramTest {
         FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeReservedBook();
         bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
         Assert.assertEquals(1, bibliotecaProgram.StartLibrary(fakeBufferedReader));
     }
 
@@ -29,10 +28,40 @@ public class BibliotecaProgramTest {
         FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeReservedBook();
         bibliotecaProgram.InitializeUser();
-       Assert.assertEquals(0, bibliotecaProgram.PerformAction(2,fakeBufferedReader));
+        bibliotecaProgram.InitializeMovie();
+       Assert.assertEquals(2, bibliotecaProgram.PerformAction(2,fakeBufferedReader));
         Assert.assertEquals(3, bibliotecaProgram.PerformAction(3,fakeBufferedReader));
         Assert.assertEquals(4, bibliotecaProgram.PerformAction(4,fakeBufferedReader));
+        Assert.assertEquals(5, bibliotecaProgram.PerformAction(5,fakeBufferedReader));
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        Assert.assertEquals(true,bibliotecaProgram.login(fakeBufferedReader));
+    }
+
+    @Test
+    public void testgetDetails() throws Exception {
+        FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        PrintStream originalOut = System.out;
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+        // Perform tests
+        bibliotecaProgram.getDetails();
+        String separator = System.getProperty("line.separator");
+        Assert.assertEquals("Please talk to Librarian. Thank you."+separator, os.toString());
+        // Restore normal operation
+        System.setOut(originalOut);
     }
 }
