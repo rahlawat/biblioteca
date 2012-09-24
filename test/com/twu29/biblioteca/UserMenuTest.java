@@ -46,9 +46,9 @@ public class UserMenuTest {
     @Test
     public void testgetUserInput() throws Exception {
         UserMenu userMenu;
-       userMenu = new UserMenu();
-        FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
-        Assert.assertEquals("1",userMenu.getUserInput(fakeBufferedReader,""));
+        userMenu = new UserMenu();
+        ConsoleStub consolestub = new ConsoleStub("1");
+        Assert.assertEquals("111-1113",userMenu.getUserInput(consolestub,"Enter your name: "));
 
     }
 

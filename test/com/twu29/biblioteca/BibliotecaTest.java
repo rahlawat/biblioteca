@@ -27,7 +27,7 @@ public class BibliotecaTest {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.addBook(book);
-        Assert.assertEquals(true,biblioteca.searchBook("Object-Oriented Analysis and Design"));;
+        Assert.assertEquals(true,biblioteca.searchBook("Object-Oriented Analysis and Design"));
 
     }
 
@@ -47,11 +47,20 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testprintBookLog() throws Exception {
+    public void testprintBook() throws Exception {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.addBook(book);
-        Assert.assertEquals(true,biblioteca.printBook());
+        PrintStream originalOut = System.out;
+        OutputStream os = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(os);
+        System.setOut(ps);
+        // Perform tests
+        biblioteca.printBook();
+        String separator = System.getProperty("line.separator");
+        Assert.assertEquals("Object-Oriented Analysis and Design    Brett D. McLaughlin    978-81-8404-221-4"+separator, os.toString());
+        // Restore normal operation
+        System.setOut(originalOut);
     }
 
     @Test

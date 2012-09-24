@@ -22,19 +22,14 @@ public class UserMenu {
         return PrintMenu;
     }
 
-    public String getUserInput(BufferedReader bufferedReader,String message) {
+    public String getUserInput(Console console,String message) {
         String inputLine = null;
         System.out.println(message);
-        try{
-            BufferedReader bfr = bufferedReader;
-            inputLine = bfr.readLine();
+            inputLine = console.readLine(message);
             if(inputLine.length()==0){
                 return null;
-            }
-        }  catch(IOException e) {
-            System.out.println("IOException e: "+ e);
         }
-        //System.out.println(inputLine);
-        return "1";
+        System.out.println(inputLine);
+        return inputLine;
     }
 }

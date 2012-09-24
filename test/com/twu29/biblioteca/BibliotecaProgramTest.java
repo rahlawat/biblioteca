@@ -15,35 +15,27 @@ import java.io.*;
 public class BibliotecaProgramTest {
     @Test
     public void testInitializeBookLog() throws Exception {
-        FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
+        ConsoleStub consoleStub = new ConsoleStub("1");
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
         bibliotecaProgram.InitializeMovie();
-        Assert.assertEquals(1, bibliotecaProgram.StartLibrary(fakeBufferedReader));
-    }
-
-    @Test
-    public void testUserOptions() throws Exception {
-        FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
-        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
-        bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeUser();
-        bibliotecaProgram.InitializeMovie();
-       Assert.assertEquals(2, bibliotecaProgram.PerformAction(2,fakeBufferedReader));
-        Assert.assertEquals(3, bibliotecaProgram.PerformAction(3,fakeBufferedReader));
-        Assert.assertEquals(4, bibliotecaProgram.PerformAction(4,fakeBufferedReader));
-        Assert.assertEquals(5, bibliotecaProgram.PerformAction(5,fakeBufferedReader));
+        Assert.assertEquals(1, bibliotecaProgram.StartLibrary(new ConsoleStub("1")));
+        Assert.assertEquals(2, bibliotecaProgram.StartLibrary(new ConsoleStub("2")));
+        Assert.assertEquals(3, bibliotecaProgram.StartLibrary(new ConsoleStub("3")));
+        Assert.assertEquals(4, bibliotecaProgram.StartLibrary(new ConsoleStub("4")));
+        Assert.assertEquals(5, bibliotecaProgram.StartLibrary(new ConsoleStub("5")));
+        Assert.assertEquals(-1, bibliotecaProgram.StartLibrary(new ConsoleStub("6")));
     }
 
     @Test
     public void testLogin() throws Exception {
-        FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
+        ConsoleStub consoleStub = new ConsoleStub("1");
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
         bibliotecaProgram.InitializeMovie();
-        Assert.assertEquals(true,bibliotecaProgram.login(fakeBufferedReader));
+        Assert.assertEquals(true,bibliotecaProgram.login(consoleStub));
     }
 
     @Test
@@ -63,5 +55,52 @@ public class BibliotecaProgramTest {
         Assert.assertEquals("Please talk to Librarian. Thank you."+separator, os.toString());
         // Restore normal operation
         System.setOut(originalOut);
+    }
+
+    @Test
+    public void testgetUserDetails() throws Exception {
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        Assert.assertEquals(true,bibliotecaProgram.getUserDetails(new ConsoleStub("1")));
+    }
+
+    @Test
+    public void testsearchBook() throws Exception {
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        String bookName = "The Programming Language of Oracle";
+        Assert.assertEquals(true,bibliotecaProgram.searchBook(bookName));
+    }
+
+    @Test
+    public void testgetUserInput() throws Exception {
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        ConsoleStub consoleStub = new ConsoleStub("1");
+        Assert.assertEquals("111-1113",bibliotecaProgram.getUserInput(consoleStub,"Enter your name: "));
+    }
+
+    @Test
+    public void testprintBook() throws Exception {
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        Assert.assertEquals(true,bibliotecaProgram.printBook());
+    }
+
+    @Test
+    public void testprintMovie() throws Exception {
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        Assert.assertEquals(true,bibliotecaProgram.printMovie());
     }
 }

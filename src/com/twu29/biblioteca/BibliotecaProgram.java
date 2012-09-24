@@ -1,6 +1,6 @@
 package com.twu29.biblioteca;
 
-import java.io.BufferedReader;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +13,13 @@ public class BibliotecaProgram {
     User user;
     Biblioteca biblioteca;
     UserMenu userMenu;
+    private PerformLogin Login = new PerformLogin();
+    private PerformPrintBook PrintBook = new PerformPrintBook();
+    private PerformBookSelection BookSelection = new PerformBookSelection();
+    private PerformPrintMovie PrintMovie = new PerformPrintMovie();
+    private PerformGetDetails GetDetails = new PerformGetDetails();
+    private PerformShowWarning ShowWarning = new PerformShowWarning();
+
 
     public BibliotecaProgram(){
      biblioteca = new Biblioteca();
@@ -38,66 +45,36 @@ public class BibliotecaProgram {
         User user3 = new User("111-1113","Cpass");
         User user4 = new User("111-1114","Dpass");
         User user5 = new User("111-1116","Epass");
-        User user6 = new User("1","1")   ;
 
         biblioteca.addUser(user1);
         biblioteca.addUser(user2);
         biblioteca.addUser(user3);
         biblioteca.addUser(user4);
         biblioteca.addUser(user5);
-        biblioteca.addUser(user6);
     }
 
-    public int StartLibrary(BufferedReader fakeBufferedReader){
+    public int StartLibrary(Console console){
         userMenu.DisplayWelcomeNote();
         userMenu.DisplayMenu();
-       int UserInput =Integer.parseInt(userMenu.getUserInput(fakeBufferedReader,"Enter your choice: "));
-        System.out.println(UserInput);
-       int out = PerformAction(UserInput,fakeBufferedReader);
+       String UserInput =userMenu.getUserInput(console,"Enter your choice: ");
+       int out = performaction(UserInput,console);
         return out;
     }
 
-    public int PerformAction(int UserInput,BufferedReader fakeBufferedReader) {
-         if(UserInput == 1){
-              login(fakeBufferedReader);
-              return 1;
-         }
-         if(UserInput == 2){
-             biblioteca.printBook();
-              return 2;
-         }
-        if(UserInput == 3)
-        {
-           String BookName = userMenu.getUserInput(fakeBufferedReader,"Enter the book: ");
-           boolean found = biblioteca.searchBook(BookName);
-            if(found == true)
-                System.out.println("Thank You! Enjoy the book.");
-            else
-                System.out.println("Sorry we don't have that book yet.");
-           return 3;
-        }
-         if(UserInput == 4){
-               biblioteca.printMovie();
-             return 4;
-         }
-         if(UserInput == 5){
-           getDetails();
-             return 5;
-         }
-        if(UserInput >5){
-                System.out.println("Select a valid option!!");
-                return -1;
-        }
-        return 0;
+    public int performaction(String UserInput,Console console) {
+        return CreateAction(UserInput).performAction(console, this);
     }
-    public void getDetails() {
-        if((user != null) && ((user.isLoggedIn()) || biblioteca.searchUser(user)) ){
-            System.out.println("Your username is: "+ user.getName());
-        }
-        else
-        {
-            System.out.println("Please talk to Librarian. Thank you.");
-        }
+
+    private Action CreateAction(String UserInput) {
+        HashMap<String,Action> generateAction= new HashMap<String,Action>();
+        generateAction.put("1",new PerformLogin());
+        generateAction.put("2",new PerformPrintBook());
+        generateAction.put("3",new PerformBookSelection());
+        generateAction.put("4",new PerformPrintMovie());
+        generateAction.put("5",new PerformGetDetails());
+        generateAction.put("6",new PerformShowWarning());
+
+        return generateAction.get(UserInput);
     }
 
     public void InitializeMovie() {
@@ -134,14 +111,14 @@ public class BibliotecaProgram {
         biblioteca.addMovie(movie14);
     }
 
-    public boolean login(BufferedReader fakeBufferedReader) {
+    public boolean login(Console console) {
         boolean loggedin = false;
         if((user!= null) && (user.isLoggedIn() == true)){
             System.out.println("You are already Logged in");
         }
         else
         {
-           loggedin = getUserDetails(fakeBufferedReader);
+           loggedin = getUserDetails(console);
             if(loggedin == true)
                 System.out.println("You are successfully logged in.");
             else
@@ -150,14 +127,41 @@ public class BibliotecaProgram {
         return loggedin;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    private boolean getUserDetails(BufferedReader fakeBufferedReader) {
-        String name =  userMenu.getUserInput(fakeBufferedReader,"Enter your name: ");
-        String password = userMenu.getUserInput(fakeBufferedReader,"Enter yout password: ");
+    public boolean getUserDetails(Console console) {
+        String name =  userMenu.getUserInput(console,"Enter your name: ");
+        String password = userMenu.getUserInput(console,"Enter your password: ");
 
         user = new User(name,password);
 
         boolean logged = biblioteca.searchUser(user);
         return logged;
 
+    }
+
+    public void getDetails() {
+        if((user != null) && ((user.isLoggedIn()) || biblioteca.searchUser(user)) ){
+            System.out.println("Your username is: "+ user.getName());
+        }
+        else
+        {
+            System.out.println("Please talk to Librarian. Thank you.");
+        }
+    }
+
+    public boolean printMovie(){
+       biblioteca.printMovie();
+        return true;
+    }
+
+    public boolean searchBook(String BookName){
+       return biblioteca.searchBook(BookName);
+    }
+
+    public String getUserInput(Console console,String message) {
+        return userMenu.getUserInput(console,message);
+    }
+
+    public boolean printBook() {
+       return biblioteca.printBook();
     }
 }
