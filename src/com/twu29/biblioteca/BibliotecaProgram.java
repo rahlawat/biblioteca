@@ -17,34 +17,28 @@ public class BibliotecaProgram {
     public BibliotecaProgram(){
      biblioteca = new Biblioteca();
      userMenu = new UserMenu();
-        user = new User();
     }
    public void InitializeBookLog(){
        Book book1= new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
-       BookLog bookLog1 = new BookLog(book1,40,20);
        Book book2 = new Book("The Programming Language of Oracle","Ivan Bayross","81-8333-241-2");
-       BookLog bookLog2 = new BookLog(book2,30,10);
        Book book3 = new Book("Design Patterns","Eric Freeman","978-81-7366-466-3");
-       BookLog bookLog3 = new BookLog(book3,45,30);
        Book book4 = new Book("General Knowledge","Manohar Pandey","978-93-5075-116-9");
-       BookLog bookLog4 = new BookLog(book4,20,15);
        Book book5 = new Book("When The Light Fades","Kathy Rodgers","978-18-4223-247-7") ;
-       BookLog bookLog5 = new BookLog(book5,30,20);
 
-       biblioteca.addBookLog(bookLog1);
-       biblioteca.addBookLog(bookLog2);
-       biblioteca.addBookLog(bookLog3);
-       biblioteca.addBookLog(bookLog4);
-       biblioteca.addBookLog(bookLog5);
+       biblioteca.addBook(book1);
+       biblioteca.addBook(book2);
+       biblioteca.addBook(book3);
+       biblioteca.addBook(book4);
+       biblioteca.addBook(book5);
    }
 
     public void InitializeUser(){
-        User user1 = new User("111-1111","Delhi","Apass");
-        User user2 = new User("111-1112","Rohtak","Bpass");
-        User user3 = new User("111-1113","Noida","Cpass");
-        User user4 = new User("111-1114","Bhiwani","Dpass");
-        User user5 = new User("111-1116","Kanpur","Epass");
-        User user6 = new User("1",null,"1")   ;
+        User user1 = new User("111-1111","Apass");
+        User user2 = new User("111-1112","Bpass");
+        User user3 = new User("111-1113","Cpass");
+        User user4 = new User("111-1114","Dpass");
+        User user5 = new User("111-1116","Epass");
+        User user6 = new User("1","1")   ;
 
         biblioteca.addUser(user1);
         biblioteca.addUser(user2);
@@ -69,13 +63,17 @@ public class BibliotecaProgram {
               return 1;
          }
          if(UserInput == 2){
-             biblioteca.printBookLog();
+             biblioteca.printBook();
               return 2;
          }
         if(UserInput == 3)
         {
-           int BookNo = Integer.parseInt(userMenu.getUserInput(fakeBufferedReader,"Enter the book no: "));
-            biblioteca.searchBook(BookNo);
+           String BookName = userMenu.getUserInput(fakeBufferedReader,"Enter the book: ");
+           boolean found = biblioteca.searchBook(BookName);
+            if(found == true)
+                System.out.println("Thank You! Enjoy the book.");
+            else
+                System.out.println("Sorry we don't have that book yet.");
            return 3;
         }
          if(UserInput == 4){
@@ -93,7 +91,7 @@ public class BibliotecaProgram {
         return 0;
     }
     public void getDetails() {
-        if((user.isLoggedIn()) || biblioteca.searchUser(user) ){
+        if((user != null) && ((user.isLoggedIn()) || biblioteca.searchUser(user)) ){
             System.out.println("Your username is: "+ user.getName());
         }
         else
@@ -138,7 +136,7 @@ public class BibliotecaProgram {
 
     public boolean login(BufferedReader fakeBufferedReader) {
         boolean loggedin = false;
-        if(user.isLoggedIn() == true){
+        if((user!= null) && (user.isLoggedIn() == true)){
             System.out.println("You are already Logged in");
         }
         else
@@ -156,8 +154,7 @@ public class BibliotecaProgram {
         String name =  userMenu.getUserInput(fakeBufferedReader,"Enter your name: ");
         String password = userMenu.getUserInput(fakeBufferedReader,"Enter yout password: ");
 
-        user.setName(name);
-        user.setPassword(password);
+        user = new User(name,password);
 
         boolean logged = biblioteca.searchUser(user);
         return logged;

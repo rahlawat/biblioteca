@@ -3,15 +3,15 @@ package com.twu29.biblioteca;
 /**
  * Created with IntelliJ IDEA.
  * User: dell
- * Date: 9/23/12
- * Time: 9:18 PM
+ * Date: 9/24/12
+ * Time: 9:35 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Movie{
+public class Movie {
     private String movieName;
+    private int movieYear;
     private String movieDirector;
     private String movieRating;
-    private int movieYear;
 
     public Movie(String movieName, int movieYear, String movieDirector, String movieRating) {
         this.movieName = movieName;
@@ -20,36 +20,7 @@ public class Movie{
         this.movieRating = movieRating;
     }
 
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public String getMovieDirector() {
-        return movieDirector;
-    }
-
-    public void setMovieDirector(String movieDirector) {
-        this.movieDirector = movieDirector;
-    }
-
-    public String getMovieRating() {
-        return movieRating;
-    }
-
-    public void setMovieRating(String movieRating) {
-        this.movieRating = movieRating;
-    }
-
-    public int getMovieYear() {
-        return movieYear;
-    }
-
-    public void setMovieYear(int movieYear) {
-        this.movieYear = movieYear;
+    public void printMovie() {
+        System.out.println(movieName+"    "+movieYear+"    "+movieDirector+"    "+movieRating);
     }
 }

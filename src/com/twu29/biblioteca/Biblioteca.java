@@ -5,18 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Biblioteca {
-    private List<BookLogSchema> bookLogList;
+    private List<Book> bookList;
     private List<User> userList;
     private List<Movie> movieList;
 
     public Biblioteca(){
-        bookLogList = new LinkedList<BookLogSchema>();
+        bookList = new LinkedList<Book>();
         userList = new LinkedList<User>();
         movieList = new LinkedList<Movie>();
     }
 
-    public boolean addBookLog(BookLogSchema booksLogs) {
-       this.bookLogList.add(booksLogs);
+    public boolean addBook(Book book) {
+       this.bookList.add(book);
         return true;
     }
 
@@ -25,12 +25,14 @@ public class Biblioteca {
         return true;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public void searchBook(int userInput) {
-         if(userInput <= bookLogList.size())
-             System.out.println("Enjoy The Book.");
-        if(userInput > bookLogList.size())
-            System.out.println("Sorry we don't have that book yet.");
-          //To change body of created methods use File | Settings | File Templates.
+    public boolean searchBook(String userInput) {
+        Book book= new Book(userInput,null,null);
+        for(Iterator i = bookList.iterator();i.hasNext();){
+            Book book1 = (Book)i.next();
+            if(book.matches(book1))
+                return true;
+        }
+        return false;
     }
 
 
@@ -40,14 +42,13 @@ public class Biblioteca {
             if(user.matches(user1))
                 return true;
         }
-        return false;  //To change body of created methods use File | Settings | File Templates.
+        return false;
     }
 
-    public boolean printBookLog() {
-        for(Iterator i = bookLogList.iterator();i.hasNext();){
-          BookLogSchema bookLog = (BookLogSchema)i.next();
-            BookSchema book =   (BookSchema)bookLog.getBook();
-            System.out.println("Name of Book: "+book.getTitle()+" Author: "+book.getAuthor()+ " ISBN: "+book.getISBN()+" Total Books: "+bookLog.getTotalCopies()+" Books Available: "+bookLog.getUnreservedCopies());
+    public boolean printBook() {
+        for(Iterator i = bookList.iterator();i.hasNext();){
+          Book book = (Book)i.next();
+          book.printBook();
         }
         return true;  //To change body of created methods use File | Settings | File Templates.
     }
@@ -60,7 +61,7 @@ public class Biblioteca {
     public void printMovie() {
         for(Iterator i = movieList.iterator();i.hasNext();){
             Movie movie = (Movie)i.next();
-            System.out.println(movie.getMovieName()+"    "+movie.getMovieYear()+"    "+movie.getMovieDirector()+"    "+movie.getMovieRating() );
+            movie.printMovie();
         }
     }
 }

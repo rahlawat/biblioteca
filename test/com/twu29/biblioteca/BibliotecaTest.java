@@ -9,34 +9,26 @@ import java.io.PrintStream;
 
 public class BibliotecaTest {
     @Test
-    public void testaddBookLog() throws Exception {
-        BookLogStub bookLogStub = new BookLogStub();
+    public void testaddBook() throws Exception {
+        Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Biblioteca biblioteca = new Biblioteca();
-        Assert.assertEquals(true,biblioteca.addBookLog(bookLogStub));
+        Assert.assertEquals(true,biblioteca.addBook(book));
     }
 
     @Test
     public void testaddUser() throws Exception {
-        UserStub userStub = new UserStub("Renu Ahlawat","New Delhi","Rahlawat");
+        User userStub = new User("Renu Ahlawat","Rahlawat");
         Biblioteca biblioteca = new Biblioteca();
         Assert.assertEquals(true,biblioteca.addUser(userStub));
     }
 
     @Test
     public void testsearchBook() throws Exception {
-        BookLogStub bookLogStub = new BookLogStub();
+        Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Biblioteca biblioteca = new Biblioteca();
-        biblioteca.addBookLog(bookLogStub);
-        PrintStream originalOut = System.out;
-        OutputStream os = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(os);
-        System.setOut(ps);
-        // Perform tests
-        biblioteca.searchBook(1);
-        String separator = System.getProperty("line.separator");
-        Assert.assertEquals("Enjoy The Book."+separator, os.toString());
-        // Restore normal operation
-        System.setOut(originalOut);
+        biblioteca.addBook(book);
+        Assert.assertEquals(true,biblioteca.searchBook("Object-Oriented Analysis and Design"));;
+
     }
 
     @Test
@@ -48,7 +40,7 @@ public class BibliotecaTest {
 
     @Test
     public void testsearchUser() throws Exception {
-        UserStub userStub = new UserStub("Renu Ahlawat","New Delhi","Rahlawat");
+        User userStub = new User("Renu Ahlawat","Rahlawat");
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.addUser(userStub);
         Assert.assertEquals(true,biblioteca.searchUser(userStub));
@@ -56,10 +48,10 @@ public class BibliotecaTest {
 
     @Test
     public void testprintBookLog() throws Exception {
-        BookLogStub bookLogStub = new BookLogStub();
+        Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Biblioteca biblioteca = new Biblioteca();
-        biblioteca.addBookLog(bookLogStub);
-        Assert.assertEquals(true,biblioteca.printBookLog());
+        biblioteca.addBook(book);
+        Assert.assertEquals(true,biblioteca.printBook());
     }
 
     @Test

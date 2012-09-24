@@ -1,6 +1,6 @@
 package com.twu29.biblioteca;
 
-public class Book implements BookSchema {
+public class Book {
     private String title;
     private String author;
     private String ISBN;
@@ -11,38 +11,29 @@ public class Book implements BookSchema {
         this.ISBN = ISBN;
     }
 
-    public String getTitle() {
+    private String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getAuthor() {
+    private String getAuthor() {
         return author;
     }
 
-
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    public String getISBN() {
+    private String getISBN() {
         return ISBN;
     }
 
-    public boolean matches(BookSchema book) {
+    public boolean matches(Book book) {
         if(title != book.getTitle())
             return false;
-        if((author != null) && (author != book.getAuthor()))
+        if(((author != null) && (book.getAuthor() != null)) && (author != book.getAuthor()))
             return false;
-        if((ISBN != null) && (ISBN != book.getISBN()))
+        if(((ISBN != null) && (book.getISBN() != null)) && (ISBN != book.getISBN()))
             return false;
         return true;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public void printBook() {
+        System.out.println(title+"    "+author+"    "+ISBN);
     }
 }

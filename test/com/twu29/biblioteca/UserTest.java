@@ -8,7 +8,7 @@ public class UserTest {
 
     @Test
     public void testmatches() throws Exception {
-        User user = new User("Renu Ahlawat","New Delhi","rahlawat");
-        Assert.assertEquals(true,user.matches(new User("Renu Ahlawat","New Delhi","rahlawat")));
+        User user = new User("Renu Ahlawat","rahlawat");
+        Assert.assertEquals(true,user.matches(new User("Renu Ahlawat","rahlawat")));
     }
 }
