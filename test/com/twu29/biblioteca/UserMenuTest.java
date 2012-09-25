@@ -12,7 +12,7 @@ import org.junit.Test;
 public class UserMenuTest {
 
     @Test
-    public void testDisplayWelcomeNote() throws Exception {
+    public void testDisplayWelcomeNote() {
         UserMenu capture;
         capture = new UserMenu();
         PrintStream originalOut = System.out;

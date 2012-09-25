@@ -10,13 +10,13 @@ import java.io.PrintStream;
 public class BookTest {
 
     @Test
-    public void testmatches() throws Exception {
+    public void testmatches() {
          Book book = new Book("When The Light Fades","Kathy Rodgers","1-84223-247-9");
         Assert.assertEquals(true,book.matches(new Book("When The Light Fades","Kathy Rodgers","1-84223-247-9")));
     }
 
     @Test
-    public void testprintBook() throws Exception {
+    public void testprintBook() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         PrintStream originalOut = System.out;
         OutputStream os = new ByteArrayOutputStream();
@@ -31,19 +31,19 @@ public class BookTest {
     }
 
     @Test
-    public void testgetTitle() throws Exception {
+    public void testgetTitle() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Assert.assertEquals("Object-Oriented Analysis and Design",book.getTitle());
     }
 
     @Test
-    public void testgetAuthor() throws Exception {
+    public void testgetAuthor() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Assert.assertEquals("Brett D. McLaughlin",book.getAuthor());
     }
 
     @Test
-    public void testgetISBN() throws Exception {
+    public void testgetISBN() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Assert.assertEquals("978-81-8404-221-4",book.getISBN());
     }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class PerformActionTest {
     @Test
-    public void testPerformAction() throws Exception {
+    public void testPerformAction() {
         ConsoleStub consoleStub = new ConsoleStub("1");
         List<Action> action = new LinkedList<Action>();
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();

@@ -16,7 +16,7 @@ import java.io.PrintStream;
  */
 public class MovieTest {
     @Test
-    public void testprintMovie() throws Exception {
+    public void testprintMovie() {
         Movie movie = new Movie("Players",2012,"Abbas-Mustan","5");
         PrintStream originalOut = System.out;
         OutputStream os = new ByteArrayOutputStream();

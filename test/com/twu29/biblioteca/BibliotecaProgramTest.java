@@ -14,7 +14,7 @@ import java.io.*;
  */
 public class BibliotecaProgramTest {
     @Test
-    public void testInitializeBookLog() throws Exception {
+    public void testInitializeBookLog() {
         ConsoleStub consoleStub = new ConsoleStub("1");
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
@@ -29,7 +29,7 @@ public class BibliotecaProgramTest {
     }
 
     @Test
-    public void testLogin() throws Exception {
+    public void testLogin() {
         ConsoleStub consoleStub = new ConsoleStub("1");
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
@@ -39,8 +39,7 @@ public class BibliotecaProgramTest {
     }
 
     @Test
-    public void testgetDetails() throws Exception {
-        FakeBufferedReader fakeBufferedReader = new FakeBufferedReader(new InputStreamReader(System.in));
+    public void testgetDetails() {
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
@@ -58,7 +57,7 @@ public class BibliotecaProgramTest {
     }
 
     @Test
-    public void testgetUserDetails() throws Exception {
+    public void testgetUserDetails()  {
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
@@ -67,7 +66,7 @@ public class BibliotecaProgramTest {
     }
 
     @Test
-    public void testsearchBook() throws Exception {
+    public void testsearchBook() {
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
@@ -77,7 +76,7 @@ public class BibliotecaProgramTest {
     }
 
     @Test
-    public void testgetUserInput() throws Exception {
+    public void testgetUserInput()  {
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
@@ -87,7 +86,7 @@ public class BibliotecaProgramTest {
     }
 
     @Test
-    public void testprintBook() throws Exception {
+    public void testprintBook() {
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
@@ -96,7 +95,7 @@ public class BibliotecaProgramTest {
     }
 
     @Test
-    public void testprintMovie() throws Exception {
+    public void testprintMovie() {
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();

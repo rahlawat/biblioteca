@@ -9,21 +9,21 @@ import java.io.PrintStream;
 
 public class BibliotecaTest {
     @Test
-    public void testaddBook() throws Exception {
+    public void testaddBook() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Biblioteca biblioteca = new Biblioteca();
         Assert.assertEquals(true,biblioteca.addBook(book));
     }
 
     @Test
-    public void testaddUser() throws Exception {
+    public void testaddUser() {
         User userStub = new User("Renu Ahlawat","Rahlawat");
         Biblioteca biblioteca = new Biblioteca();
         Assert.assertEquals(true,biblioteca.addUser(userStub));
     }
 
     @Test
-    public void testsearchBook() throws Exception {
+    public void testsearchBook() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.addBook(book);
@@ -32,14 +32,14 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testaddMovie() throws Exception {
+    public void testaddMovie() {
         Movie movie = new Movie("Roza",1992,"Mani Ratnam","9");
         Biblioteca biblioteca = new Biblioteca();
         Assert.assertEquals(true,biblioteca.addMovie(movie));
     }
 
     @Test
-    public void testsearchUser() throws Exception {
+    public void testsearchUser() {
         User userStub = new User("Renu Ahlawat","Rahlawat");
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.addUser(userStub);
@@ -47,7 +47,7 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testprintBook() throws Exception {
+    public void testprintBook() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.addBook(book);
@@ -64,7 +64,7 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testprintMovie() throws Exception {
+    public void testprintMovie() {
        Movie movie = new Movie("A",1990,"AB","6");
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.addMovie(movie);

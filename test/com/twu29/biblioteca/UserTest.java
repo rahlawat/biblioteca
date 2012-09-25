@@ -7,25 +7,25 @@ import org.junit.Test;
 public class UserTest {
 
     @Test
-    public void testmatches() throws Exception {
+    public void testmatches() {
         User user = new User("Renu Ahlawat","rahlawat");
         Assert.assertEquals(true,user.matches(new User("Renu Ahlawat","rahlawat")));
     }
 
     @Test
-    public void testgetName() throws Exception {
+    public void testgetName() {
         User user = new User("Renu Ahlawat","rahlawat");
         Assert.assertEquals("Renu Ahlawat",user.getUserName());
     }
 
     @Test
-    public void testisLoggedIn() throws Exception {
+    public void testisLoggedIn() {
         User user = new User("Renu Ahlawat","rahlawat");
         Assert.assertEquals(false,user.isLoggedIn());
     }
 
     @Test
-    public void testgetPassword() throws Exception {
+    public void testgetPassword() {
         User user = new User("Renu Ahlawat","rahlawat");
         Assert.assertEquals("rahlawat",user.getPassword());
     }
