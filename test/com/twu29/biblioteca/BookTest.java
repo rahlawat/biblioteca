@@ -29,4 +29,22 @@ public class BookTest {
         Assert.assertEquals(ExpectedMatch, os.toString());
         System.setOut(originalOut);
     }
+
+    @Test
+    public void testgetTitle() throws Exception {
+        Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
+        Assert.assertEquals("Object-Oriented Analysis and Design",book.getTitle());
+    }
+
+    @Test
+    public void testgetAuthor() throws Exception {
+        Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
+        Assert.assertEquals("Brett D. McLaughlin",book.getAuthor());
+    }
+
+    @Test
+    public void testgetISBN() throws Exception {
+        Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
+        Assert.assertEquals("978-81-8404-221-4",book.getISBN());
+    }
 }

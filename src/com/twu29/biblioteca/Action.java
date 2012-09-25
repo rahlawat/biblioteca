@@ -8,5 +8,5 @@ package com.twu29.biblioteca;
  * To change this template use File | Settings | File Templates.
  */
 public interface Action {
-    int performAction(Console console, BibliotecaProgram bibliotecaProgram);
+   public int performAction(Console console, BibliotecaProgram bibliotecaProgram);
 }

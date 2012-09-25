@@ -10,13 +10,13 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
+    public String getUserName() {
         return userName;
     }
 
     public boolean matches(User user) {
         boolean valid = true;
-        if(userName != user.getName())
+        if(userName != user.getUserName())
             valid =  false;
         if(password != user.getPassword())
             valid =  false;
@@ -34,7 +34,7 @@ public class User {
         return isLoggedIn;
     }
 
-    private String getPassword() {
+    protected String getPassword() {
         return password;
     }
 }

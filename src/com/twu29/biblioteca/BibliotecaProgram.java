@@ -13,13 +13,6 @@ public class BibliotecaProgram {
     User user;
     Biblioteca biblioteca;
     UserMenu userMenu;
-    private PerformLogin Login = new PerformLogin();
-    private PerformPrintBook PrintBook = new PerformPrintBook();
-    private PerformBookSelection BookSelection = new PerformBookSelection();
-    private PerformPrintMovie PrintMovie = new PerformPrintMovie();
-    private PerformGetDetails GetDetails = new PerformGetDetails();
-    private PerformShowWarning ShowWarning = new PerformShowWarning();
-
 
     public BibliotecaProgram(){
      biblioteca = new Biblioteca();
@@ -51,30 +44,6 @@ public class BibliotecaProgram {
         biblioteca.addUser(user3);
         biblioteca.addUser(user4);
         biblioteca.addUser(user5);
-    }
-
-    public int StartLibrary(Console console){
-        userMenu.DisplayWelcomeNote();
-        userMenu.DisplayMenu();
-       String UserInput =userMenu.getUserInput(console,"Enter your choice: ");
-       int out = performaction(UserInput,console);
-        return out;
-    }
-
-    public int performaction(String UserInput,Console console) {
-        return CreateAction(UserInput).performAction(console, this);
-    }
-
-    private Action CreateAction(String UserInput) {
-        HashMap<String,Action> generateAction= new HashMap<String,Action>();
-        generateAction.put("1",new PerformLogin());
-        generateAction.put("2",new PerformPrintBook());
-        generateAction.put("3",new PerformBookSelection());
-        generateAction.put("4",new PerformPrintMovie());
-        generateAction.put("5",new PerformGetDetails());
-        generateAction.put("6",new PerformShowWarning());
-
-        return generateAction.get(UserInput);
     }
 
     public void InitializeMovie() {
@@ -111,6 +80,28 @@ public class BibliotecaProgram {
         biblioteca.addMovie(movie14);
     }
 
+
+    public int StartLibrary(Console console){
+        userMenu.DisplayWelcomeNote();
+        userMenu.DisplayMenu();
+       String UserInput =userMenu.getUserInput(console,"Enter your choice: ");
+       int out = performaction(UserInput,console);
+        return out;
+    }
+
+    public int performaction(String UserInput,Console console) {
+        HashMap<String,Action> generateAction= new HashMap<String,Action>();
+        generateAction.put("1",new PerformLogin());
+        generateAction.put("2",new PerformPrintBook());
+        generateAction.put("3",new PerformBookSelection());
+        generateAction.put("4",new PerformPrintMovie());
+        generateAction.put("5",new PerformGetDetails());
+        generateAction.put("6",new PerformShowWarning());
+
+
+        return  generateAction.get(UserInput).performAction(console, this);
+    }
+
     public boolean login(Console console) {
         boolean loggedin = false;
         if((user!= null) && (user.isLoggedIn() == true)){
@@ -140,7 +131,7 @@ public class BibliotecaProgram {
 
     public void getDetails() {
         if((user != null) && ((user.isLoggedIn()) || biblioteca.searchUser(user)) ){
-            System.out.println("Your username is: "+ user.getName());
+            System.out.println("Your username is: "+ user.getUserName());
         }
         else
         {
