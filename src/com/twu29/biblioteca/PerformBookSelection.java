@@ -8,13 +8,12 @@ package com.twu29.biblioteca;
  * To change this template use File | Settings | File Templates.
  */
 public class PerformBookSelection implements Action {
-   public int performAction(Console console, BibliotecaProgram bibliotecaProgram) {
+   public void performAction(Console console, BibliotecaProgram bibliotecaProgram) {
         String BookName = bibliotecaProgram.getUserInput(console, "Enter the book: ");
         boolean found = bibliotecaProgram.searchBook(BookName);
         if(found == true)
-            System.out.println("Thank You! Enjoy the book.");
+            console.println("Thank You! Enjoy the book.");
         else
-            System.out.println("Sorry we don't have that book yet.");
-        return 3;
+            console.println("Sorry we don't have that book yet.");
     }
 }

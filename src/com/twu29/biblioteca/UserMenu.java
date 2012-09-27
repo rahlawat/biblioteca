@@ -10,26 +10,26 @@ public class UserMenu {
     private String WelcomeNote = "Welcome To Biblioteca";
     private String[] menuItem = {"Login","List Of Books","Select Book","Movie Catalog","Contact"};
 
-    public String DisplayWelcomeNote() {
-        System.out.println(WelcomeNote);
+    public String DisplayWelcomeNote(Console console) {
+        console.println(WelcomeNote);
         return WelcomeNote;
     }
 
-    public String DisplayMenu() {
+    public String DisplayMenu(Console console) {
         String separator = System.getProperty("line.separator");
         String PrintMenu = "1. "+menuItem[0]+separator+"2. "+menuItem[1]+separator+"3. "+menuItem[2]+separator+"4. "+menuItem[3]+separator+"5. "+menuItem[4];
-        System.out.println(PrintMenu);
+        console.println(PrintMenu);
         return PrintMenu;
     }
 
     public String getUserInput(Console console,String message) {
         String inputLine = null;
-        System.out.println(message);
+        console.println(message);
             inputLine = console.readLine(message);
             if(inputLine.length()==0){
                 return null;
         }
-        System.out.println(inputLine);
+        console.println(inputLine);
         return inputLine;
     }
 }

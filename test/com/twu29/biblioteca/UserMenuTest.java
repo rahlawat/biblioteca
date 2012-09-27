@@ -15,36 +15,26 @@ public class UserMenuTest {
     public void testDisplayWelcomeNote() {
         UserMenu capture;
         capture = new UserMenu();
-        PrintStream originalOut = System.out;
-        OutputStream os = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(os);
-        System.setOut(ps);
-        // Perform tests
-        capture.DisplayWelcomeNote();
+        ConsoleStub consoleStub = new ConsoleStub("1");
+        capture.DisplayWelcomeNote(consoleStub);
         String separator = System.getProperty("line.separator");
-        Assert.assertEquals("Welcome To Biblioteca"+separator, os.toString());
-        // Restore normal operation
-        System.setOut(originalOut);
+        Assert.assertTrue(consoleStub.isPrinted("Welcome To Biblioteca"));
+
     }
 
     @Test
-    public void testDisplayMenu() throws Exception {
+    public void testDisplayMenu() {
         UserMenu capture;
         capture = new UserMenu();
-        PrintStream originalOut = System.out;
-        OutputStream os = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(os);
-        System.setOut(ps);
-        // Perform tests
-        capture.DisplayMenu();
+        ConsoleStub consoleStub = new ConsoleStub("1");
+        capture.DisplayMenu(consoleStub);
         String separator = System.getProperty("line.separator");
-        String ExpectedMatch = "1. Login"+separator+"2. List Of Books"+separator+"3. Select Book"+separator+"4. Movie Catalog"+separator+"5. Contact"+separator;
-        Assert.assertEquals(ExpectedMatch, os.toString());
-        System.setOut(originalOut);
+        String ExpectedMatch = "1. Login"+separator+"2. List Of Books"+separator+"3. Select Book"+separator+"4. Movie Catalog"+separator+"5. Contact";
+        Assert.assertTrue(consoleStub.isPrinted(ExpectedMatch));
     }
 
     @Test
-    public void testgetUserInput() throws Exception {
+    public void testgetUserInput() {
         UserMenu userMenu;
         userMenu = new UserMenu();
         ConsoleStub consolestub = new ConsoleStub("1");

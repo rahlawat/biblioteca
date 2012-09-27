@@ -9,8 +9,7 @@ package com.twu29.biblioteca;
  */
 public class PerformGetDetails implements Action {
 
-   public int performAction(Console console, BibliotecaProgram bibliotecaProgram) {
-        bibliotecaProgram.getDetails();
-        return 5;
+   public void performAction(Console console, BibliotecaProgram bibliotecaProgram) {
+        bibliotecaProgram.getDetails(console);
     }
 }

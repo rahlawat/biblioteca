@@ -10,16 +10,17 @@ public class User {
         this.password = password;
     }
 
-    public String getUserName() {
+    public User(){}
+
+    @Override
+    public String toString() {
         return userName;
     }
 
     public boolean matches(User user) {
-        boolean valid = true;
-        if(userName != user.getUserName())
-            valid =  false;
-        if(password != user.getPassword())
-            valid =  false;
+        boolean valid = false;
+        if(userName.equals(user.userName) && password.equals(user.password))
+            valid =  true;
         if(valid == true){
             isLoggedIn = true;
         }
@@ -31,10 +32,19 @@ public class User {
     }
 
     public boolean isLoggedIn() {
-        return isLoggedIn;
+        if(isLoggedIn ==true)
+        return true;
+        else
+            return false;
     }
 
-    protected String getPassword() {
-        return password;
+    public void getUserDetails(Console console) {
+        UserMenu userMenu = new UserMenu();
+        String name =  userMenu.getUserInput(console,"Enter your name: ");
+        String password = userMenu.getUserInput(console,"Enter your password: ");
+        this.userName = name;
+        this.password = password;
+
     }
+
 }

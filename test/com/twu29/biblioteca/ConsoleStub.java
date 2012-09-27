@@ -1,6 +1,9 @@
 package com.twu29.biblioteca;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +14,7 @@ import java.util.HashMap;
  */
 public class ConsoleStub implements Console{
     HashMap<String,String> input = new HashMap<String, String>();
+     List<String> outputLines = new ArrayList<String>();
 
     public ConsoleStub(String Choice){
        input.put("Enter your name: ","111-1113");
@@ -24,5 +28,19 @@ public class ConsoleStub implements Console{
             return input.get(text);
         }
         return null;
+    }
+
+    @Override
+    public void println(String text) {
+       outputLines.add(text);
+    }
+
+    public boolean isPrinted(String text){
+        for (Iterator i = outputLines.iterator(); i.hasNext(); ) {
+            String output = (String) i.next();
+            if (output.equals(text))
+                return true;
+        }
+        return false;
     }
 }

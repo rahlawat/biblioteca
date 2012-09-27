@@ -11,12 +11,17 @@ import java.util.HashMap;
  */
 public class BibliotecaProgram {
     User user;
-    Biblioteca biblioteca;
+    private final BookCollection bookCollection;
+    private final MovieCollection movieCollection;
+    private final UserCollection userCollection;
     UserMenu userMenu;
 
     public BibliotecaProgram(){
-     biblioteca = new Biblioteca();
      userMenu = new UserMenu();
+     user = new User();
+     bookCollection = new BookCollection();
+     movieCollection = new MovieCollection();
+     userCollection = new UserCollection();
     }
    public void InitializeBookLog(){
        Book book1= new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
@@ -25,11 +30,11 @@ public class BibliotecaProgram {
        Book book4 = new Book("General Knowledge","Manohar Pandey","978-93-5075-116-9");
        Book book5 = new Book("When The Light Fades","Kathy Rodgers","978-18-4223-247-7") ;
 
-       biblioteca.addBook(book1);
-       biblioteca.addBook(book2);
-       biblioteca.addBook(book3);
-       biblioteca.addBook(book4);
-       biblioteca.addBook(book5);
+       bookCollection.addBook(book1);
+       bookCollection.addBook(book2);
+       bookCollection.addBook(book3);
+       bookCollection.addBook(book4);
+       bookCollection.addBook(book5);
    }
 
     public void InitializeUser(){
@@ -39,11 +44,11 @@ public class BibliotecaProgram {
         User user4 = new User("111-1114","Dpass");
         User user5 = new User("111-1116","Epass");
 
-        biblioteca.addUser(user1);
-        biblioteca.addUser(user2);
-        biblioteca.addUser(user3);
-        biblioteca.addUser(user4);
-        biblioteca.addUser(user5);
+        userCollection.addUser(user1);
+        userCollection.addUser(user2);
+        userCollection.addUser(user3);
+        userCollection.addUser(user4);
+        userCollection.addUser(user5);
     }
 
     public void InitializeMovie() {
@@ -63,35 +68,34 @@ public class BibliotecaProgram {
         Movie movie13 = new Movie("Rajneeti",2010,"Prakash Jha","9");
         Movie movie14 = new Movie("Life In A Metro",2007,"Anurag Basu","10");
 
-        biblioteca.addMovie(movie);
-        biblioteca.addMovie(movie1);
-        biblioteca.addMovie(movie2);
-        biblioteca.addMovie(movie3);
-        biblioteca.addMovie(movie4);
-        biblioteca.addMovie(movie5);
-        biblioteca.addMovie(movie6);
-        biblioteca.addMovie(movie7);
-        biblioteca.addMovie(movie8);
-        biblioteca.addMovie(movie9);
-        biblioteca.addMovie(movie10);
-        biblioteca.addMovie(movie11);
-        biblioteca.addMovie(movie12);
-        biblioteca.addMovie(movie13);
-        biblioteca.addMovie(movie14);
+        movieCollection.addMovie(movie);
+        movieCollection.addMovie(movie1);
+        movieCollection.addMovie(movie2);
+        movieCollection.addMovie(movie3);
+        movieCollection.addMovie(movie4);
+        movieCollection.addMovie(movie5);
+        movieCollection.addMovie(movie6);
+        movieCollection.addMovie(movie7);
+        movieCollection.addMovie(movie8);
+        movieCollection.addMovie(movie9);
+        movieCollection.addMovie(movie10);
+        movieCollection.addMovie(movie11);
+        movieCollection.addMovie(movie12);
+        movieCollection.addMovie(movie13);
+        movieCollection.addMovie(movie14);
     }
 
 
-    public int StartLibrary(Console console){
-        userMenu.DisplayWelcomeNote();
-        userMenu.DisplayMenu();
+    public void StartLibrary(Console console){
+        userMenu.DisplayWelcomeNote(console);
+        userMenu.DisplayMenu(console);
        String UserInput =userMenu.getUserInput(console,"Enter your choice: ");
-       int out = performaction(UserInput,console);
-        return out;
+        performaction(UserInput,console);
     }
 
-    public int performaction(String UserInput,Console console) {
+    public void performaction(String UserInput,Console console) {
         HashMap<String,Action> generateAction= new HashMap<String,Action>();
-        generateAction.put("1",new PerformLogin());
+        generateAction.put("1", new PerformLogin());
         generateAction.put("2",new PerformPrintBook());
         generateAction.put("3",new PerformBookSelection());
         generateAction.put("4",new PerformPrintMovie());
@@ -99,60 +103,37 @@ public class BibliotecaProgram {
         generateAction.put("6",new PerformShowWarning());
 
 
-        return  generateAction.get(UserInput).performAction(console, this);
+        generateAction.get(UserInput).performAction(console, this);
     }
 
-    public boolean login(Console console) {
-        boolean loggedin = false;
-        if((user!= null) && (user.isLoggedIn() == true)){
-            System.out.println("You are already Logged in");
+    public void login(Console console) {
+        userCollection.login(console,user);  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public void getDetails(Console console) {
+        if((user.toString() != null ) && ((user.isLoggedIn()) || userCollection.searchUser(user)) ){
+            console.println("Your username is: "+ user.toString());
         }
         else
         {
-           loggedin = getUserDetails(console);
-            if(loggedin == true)
-                System.out.println("You are successfully logged in.");
-            else
-                System.out.println("Username/Password is Wrong.");
-        }
-        return loggedin;  //To change body of created methods use File | Settings | File Templates.
-    }
-
-    public boolean getUserDetails(Console console) {
-        String name =  userMenu.getUserInput(console,"Enter your name: ");
-        String password = userMenu.getUserInput(console,"Enter your password: ");
-
-        user = new User(name,password);
-
-        boolean logged = biblioteca.searchUser(user);
-        return logged;
-
-    }
-
-    public void getDetails() {
-        if((user != null) && ((user.isLoggedIn()) || biblioteca.searchUser(user)) ){
-            System.out.println("Your username is: "+ user.getUserName());
-        }
-        else
-        {
-            System.out.println("Please talk to Librarian. Thank you.");
+           console.println("Please talk to Librarian. Thank you.");
         }
     }
 
-    public boolean printMovie(){
-       biblioteca.printMovie();
+    public boolean printMovie(Console console){
+       movieCollection.printMovie(console);
         return true;
     }
 
     public boolean searchBook(String BookName){
-       return biblioteca.searchBook(BookName);
+       return bookCollection.searchBook(BookName);
     }
 
     public String getUserInput(Console console,String message) {
         return userMenu.getUserInput(console,message);
     }
 
-    public boolean printBook() {
-       return biblioteca.printBook();
+    public boolean printBook(Console console) {
+       return bookCollection.printBook(console);
     }
 }

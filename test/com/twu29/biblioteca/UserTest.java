@@ -13,20 +13,24 @@ public class UserTest {
     }
 
     @Test
-    public void testgetName() {
-        User user = new User("Renu Ahlawat","rahlawat");
-        Assert.assertEquals("Renu Ahlawat",user.getUserName());
-    }
-
-    @Test
     public void testisLoggedIn() {
         User user = new User("Renu Ahlawat","rahlawat");
-        Assert.assertEquals(false,user.isLoggedIn());
+        Assert.assertFalse(user.isLoggedIn());
     }
 
+     @Test
+        public void testgetUserDetails()  {
+            User user = new User();
+         User userMatch =new User("111-1113","Cpass");
+          user.getUserDetails(new ConsoleStub("1"));
+         Assert.assertTrue(user.matches(userMatch));
+
+        }
+
     @Test
-    public void testgetPassword() {
-        User user = new User("Renu Ahlawat","rahlawat");
-        Assert.assertEquals("rahlawat",user.getPassword());
+    public void testtoString() {
+        User user =new User("111-1113","Cpass");
+        String ExpectedMatch = "111-1113";
+        Assert.assertEquals(ExpectedMatch, user.toString());
     }
 }

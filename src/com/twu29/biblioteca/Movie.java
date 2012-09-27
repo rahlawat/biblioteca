@@ -20,7 +20,9 @@ public class Movie {
         this.movieRating = movieRating;
     }
 
-    public void printMovie() {
-        System.out.println(movieName+"    "+movieYear+"    "+movieDirector+"    "+movieRating);
+
+    @Override
+    public String toString() {
+        return movieName+"    "+movieYear+"    "+movieDirector+"    "+movieRating;
     }
 }

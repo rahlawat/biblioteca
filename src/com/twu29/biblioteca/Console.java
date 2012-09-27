@@ -9,4 +9,5 @@ package com.twu29.biblioteca;
  */
 public interface Console {
     public String readLine(String text);
+    public void println(String text);
 }

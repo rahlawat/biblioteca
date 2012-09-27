@@ -9,8 +9,7 @@ package com.twu29.biblioteca;
  */
 public class PerformShowWarning implements Action {
    @Override
-   public int performAction(Console console, BibliotecaProgram bibliotecaProgram) {
-        System.out.println("Select a valid option!!");
-        return -1;
+   public void performAction(Console console, BibliotecaProgram bibliotecaProgram) {
+        console.println("Select a valid option!!");
     }
 }

@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import java.io.*;
 
+import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.containsString;
+
 /**
  * Created with IntelliJ IDEA.
  * User: dell
@@ -13,29 +16,70 @@ import java.io.*;
  * To change this template use File | Settings | File Templates.
  */
 public class BibliotecaProgramTest {
+
     @Test
-    public void testInitializeBookLog() {
-        ConsoleStub consoleStub = new ConsoleStub("1");
+    public void testSelectBook() {
+        ConsoleStub consoleStub = new ConsoleStub("3");
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
         bibliotecaProgram.InitializeMovie();
-        Assert.assertEquals(1, bibliotecaProgram.StartLibrary(new ConsoleStub("1")));
-        Assert.assertEquals(2, bibliotecaProgram.StartLibrary(new ConsoleStub("2")));
-        Assert.assertEquals(3, bibliotecaProgram.StartLibrary(new ConsoleStub("3")));
-        Assert.assertEquals(4, bibliotecaProgram.StartLibrary(new ConsoleStub("4")));
-        Assert.assertEquals(5, bibliotecaProgram.StartLibrary(new ConsoleStub("5")));
-        Assert.assertEquals(-1, bibliotecaProgram.StartLibrary(new ConsoleStub("6")));
+        bibliotecaProgram.StartLibrary(consoleStub);
+        Assert.assertTrue(consoleStub.isPrinted("Thank You! Enjoy the book."));
     }
 
     @Test
-    public void testLogin() {
+    public void testlogin() {
         ConsoleStub consoleStub = new ConsoleStub("1");
         BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
         bibliotecaProgram.InitializeMovie();
-        Assert.assertEquals(true,bibliotecaProgram.login(consoleStub));
+        bibliotecaProgram.StartLibrary(consoleStub);
+        Assert.assertTrue(consoleStub.isPrinted("You are successfully logged in."));
+    }
+
+    @Test
+    public void testGetDetails() {
+        ConsoleStub consoleStub = new ConsoleStub("5");
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        bibliotecaProgram.StartLibrary(consoleStub);
+        Assert.assertTrue(consoleStub.isPrinted("Please talk to Librarian. Thank you."));
+    }
+
+    @Test
+    public void testListOfBooks() {
+        ConsoleStub consoleStub = new ConsoleStub("2");
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        bibliotecaProgram.StartLibrary(consoleStub);
+        Assert.assertTrue(consoleStub.isPrinted("Object-Oriented Analysis and Design    Brett D. McLaughlin    978-81-8404-221-4"));
+    }
+
+    @Test
+    public void testMovieCatalog() {
+        ConsoleStub consoleStub = new ConsoleStub("4");
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        bibliotecaProgram.StartLibrary(consoleStub);
+    }
+
+    @Test
+    public void testShowWarning() {
+        ConsoleStub consoleStub = new ConsoleStub("6");
+        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
+        bibliotecaProgram.InitializeBookLog();
+        bibliotecaProgram.InitializeUser();
+        bibliotecaProgram.InitializeMovie();
+        bibliotecaProgram.StartLibrary(consoleStub);
+        Assert.assertTrue(consoleStub.isPrinted("Select a valid option!!"));
     }
 
     @Test
@@ -44,26 +88,13 @@ public class BibliotecaProgramTest {
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
         bibliotecaProgram.InitializeMovie();
-        PrintStream originalOut = System.out;
-        OutputStream os = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(os);
-        System.setOut(ps);
-        // Perform tests
-        bibliotecaProgram.getDetails();
+        ConsoleStub consoleStub = new ConsoleStub("1");
+        bibliotecaProgram.getDetails(consoleStub);
         String separator = System.getProperty("line.separator");
-        Assert.assertEquals("Please talk to Librarian. Thank you."+separator, os.toString());
-        // Restore normal operation
-        System.setOut(originalOut);
+        Assert.assertTrue(consoleStub.isPrinted("Please talk to Librarian. Thank you."));
     }
 
-    @Test
-    public void testgetUserDetails()  {
-        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
-        bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeUser();
-        bibliotecaProgram.InitializeMovie();
-        Assert.assertEquals(true,bibliotecaProgram.getUserDetails(new ConsoleStub("1")));
-    }
+
 
     @Test
     public void testsearchBook() {
@@ -91,7 +122,9 @@ public class BibliotecaProgramTest {
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
         bibliotecaProgram.InitializeMovie();
-        Assert.assertEquals(true,bibliotecaProgram.printBook());
+        ConsoleStub consoleStub = new ConsoleStub("1");
+        bibliotecaProgram.printBook(consoleStub);
+        Assert.assertTrue(consoleStub.isPrinted("Object-Oriented Analysis and Design    Brett D. McLaughlin    978-81-8404-221-4"));
     }
 
     @Test
@@ -100,7 +133,9 @@ public class BibliotecaProgramTest {
         bibliotecaProgram.InitializeBookLog();
         bibliotecaProgram.InitializeUser();
         bibliotecaProgram.InitializeMovie();
-        Assert.assertEquals(true,bibliotecaProgram.printMovie());
+        ConsoleStub consoleStub = new ConsoleStub("1");
+        bibliotecaProgram.printMovie(consoleStub);
+        Assert.assertTrue(consoleStub.isPrinted("Dil Se    1998    Mani Ratnam    9"));
     }
 
 }

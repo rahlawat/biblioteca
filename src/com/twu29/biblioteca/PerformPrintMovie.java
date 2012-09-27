@@ -8,8 +8,7 @@ package com.twu29.biblioteca;
  * To change this template use File | Settings | File Templates.
  */
 public class PerformPrintMovie implements Action {
-    public int performAction(Console console, BibliotecaProgram bibliotecaProgram) {
-        bibliotecaProgram.printMovie();
-        return 4;
+    public void performAction(Console console, BibliotecaProgram bibliotecaProgram) {
+        bibliotecaProgram.printMovie(console);
     }
 }

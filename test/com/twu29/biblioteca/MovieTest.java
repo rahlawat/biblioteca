@@ -16,18 +16,10 @@ import java.io.PrintStream;
  */
 public class MovieTest {
     @Test
-    public void testprintMovie() {
-        Movie movie = new Movie("Players",2012,"Abbas-Mustan","5");
-        PrintStream originalOut = System.out;
-        OutputStream os = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(os);
-        System.setOut(ps);
-        // Perform tests
-        movie.printMovie();
-        String separator = System.getProperty("line.separator");
-        String ExpectedMatch = "Players    2012    Abbas-Mustan    5"+separator;
-        Assert.assertEquals(ExpectedMatch, os.toString());
-        System.setOut(originalOut);
-
+    public void testtoString() {
+        Movie movie = new Movie("Roza",1992,"Mani Ratnam","9");
+        String ExpectedMatch = "Roza    1992    Mani Ratnam    9";
+        Assert.assertEquals(ExpectedMatch, movie.toString());
     }
+
 }
