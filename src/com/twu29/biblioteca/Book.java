@@ -12,7 +12,7 @@ public class Book {
     }
 
     public boolean matchTitle(String bookTitle) {
-        return (title.equals(bookTitle)))
+        return (title.equals(bookTitle));
           //To change body of created methods use File | Settings | File Templates.
     }
 
