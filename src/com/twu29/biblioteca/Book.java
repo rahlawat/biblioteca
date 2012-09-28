@@ -12,9 +12,8 @@ public class Book {
     }
 
     public boolean matchTitle(String bookTitle) {
-        if(! (title.equals(bookTitle)))
-            return false;
-        return true;  //To change body of created methods use File | Settings | File Templates.
+        return (title.equals(bookTitle)))
+          //To change body of created methods use File | Settings | File Templates.
     }
 
     @Override
