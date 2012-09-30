@@ -24,6 +24,7 @@ public class BibliotecaLibrary {
      movieCollection = new MovieCollection();
      userCollection = new UserCollection();
     }
+
    public void InitializeBookLog(){
        Book book1= new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
        Book book2 = new Book("The Programming Language of Oracle","Ivan Bayross","81-8333-241-2");

@@ -1,0 +1,14 @@
+Line No. :- 8      Code Smell :- Divergent Change. The class Program performs more then one functionality like getiing user details, 		           validating the user, performing specific action which breaks the single responsibility design and voilates the 		           contract. The responsibilities can be oved to other classes.
+
+Line No :- 68      Code Smell:- Multiple If statments. The use of multiple If statments here lead to multiple paths in the same code                      which forms a smell and leads to breaking of the single resposibility principle.
+
+Line No. :- 140    Code Smell :- Duplicate Code. If modification occurs we need to make changes in more then one palces The code to 			   get username and password from user is same so it can be extracted in a separate method. 
+
+Line No :- 140     The method get user details is mostly interested in the details of a user which leads to inappropriate intimacy. So 		   this method should better be moved to the user class.
+
+Line No. :- 200    Code Smell :- Switch statement. Swtich statements may lead to duplicate code and maintenance problems. In this case 		   the switch statement is present only at this one place and also does not presents duplicate code it might not pose 		           any such threat.
+
+Line No. :-227     The fields movieName, directorName and rating are related to each other. It would be easy to work with them if                    moved to a separate class. 
+ 
+
+Line No. :- 260    There is use of getters and setters in the class User which breaks encapsulation by making the private member                          variables accessible through public getters and setters from outside the class.
