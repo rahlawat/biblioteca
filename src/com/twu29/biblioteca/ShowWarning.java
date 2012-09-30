@@ -7,9 +7,15 @@ package com.twu29.biblioteca;
  * Time: 12:52 AM
  * To change this template use File | Settings | File Templates.
  */
-public class PerformShowWarning implements Action {
-   @Override
-   public void performAction(Console console, BibliotecaProgram bibliotecaProgram) {
+public class ShowWarning implements Action {
+    private Console console;
+
+    public ShowWarning(Console console) {
+        this.console = console;
+    }
+
+    @Override
+   public void userAction() {
         console.println("Select a valid option!!");
     }
 }

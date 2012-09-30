@@ -18,15 +18,6 @@ public class UserTest {
         Assert.assertFalse(user.isLoggedIn());
     }
 
-     @Test
-        public void testgetUserDetails()  {
-            User user = new User();
-         User userMatch =new User("111-1113","Cpass");
-          user.getUserDetails(new ConsoleStub("1"));
-         Assert.assertTrue(user.matches(userMatch));
-
-        }
-
     @Test
     public void testtoString() {
         User user =new User("111-1113","Cpass");

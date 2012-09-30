@@ -19,7 +19,8 @@ public class BookCollectionTest {
     public void testaddBook() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         BookCollection bookCollection = new BookCollection();
-        Assert.assertEquals(true,bookCollection.addBook(book));
+        bookCollection.addBook(book);
+        Assert.assertTrue(bookCollection.searchBook("Object-Oriented Analysis and Design"));
     }
 
     @Test
@@ -32,13 +33,21 @@ public class BookCollectionTest {
     }
 
     @Test
-    public void testprintBook() {
+    public void testbookCount() {
+        Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
+        Book book2 = new Book("The Programming Language of Oracle","Ivan Bayross","81-8333-241-2");
+        BookCollection bookCollection = new BookCollection();
+        bookCollection.addBook(book);
+        bookCollection.addBook(book2);
+        Assert.assertEquals(2,bookCollection.count());
+    }
+
+    @Test
+    public void testtoString() {
         Book book = new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
         BookCollection bookCollection = new BookCollection();
         bookCollection.addBook(book);
-        ConsoleStub consoleStub = new ConsoleStub("1");
-        bookCollection.printBook(consoleStub);
-        String separator = System.getProperty("line.separator");
-        Assert.assertTrue(consoleStub.isPrinted("Object-Oriented Analysis and Design    Brett D. McLaughlin    978-81-8404-221-4"));
+        String expectedString = "Object-Oriented Analysis and Design    Brett D. McLaughlin    978-81-8404-221-4";
+        Assert.assertEquals(expectedString,bookCollection.bookInformation(0));
     }
 }

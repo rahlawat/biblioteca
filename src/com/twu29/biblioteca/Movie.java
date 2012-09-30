@@ -20,7 +20,6 @@ public class Movie {
         this.movieRating = movieRating;
     }
 
-
     @Override
     public String toString() {
         return movieName+"    "+movieYear+"    "+movieDirector+"    "+movieRating;

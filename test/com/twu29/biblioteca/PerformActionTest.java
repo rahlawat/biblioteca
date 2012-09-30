@@ -3,14 +3,7 @@ package com.twu29.biblioteca;
 import junit.framework.Assert;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.assertThat;
-import static org.junit.matchers.JUnitMatchers.containsString;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,72 +17,79 @@ public class PerformActionTest {
     @Test
     public void testPerformBookSelection() {
         ConsoleStub consoleStub = new ConsoleStub("1");
-        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
-        bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeUser();
-        bibliotecaProgram.InitializeMovie();
-        PerformBookSelection performBookSelection = new PerformBookSelection();
-        performBookSelection.performAction(consoleStub, bibliotecaProgram);
-        Assert.assertTrue(consoleStub.isPrinted("Thank You! Enjoy the book."));
+        BookCollection bookCollection = new BookCollection();
+        Book book1= new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
+        Book book2 = new Book("The Programming Language of Oracle","Ivan Bayross","81-8333-241-2");
+        Book book3 = new Book("Design Patterns","Eric Freeman","978-81-7366-466-3");
+
+        bookCollection.addBook(book1);
+        bookCollection.addBook(book2);
+        bookCollection.addBook(book3);
+        IUser user = new User("111-1111","Apass");
+        ReserveBook performBookSelection = new ReserveBook(consoleStub,bookCollection,user);
+        performBookSelection.userAction();
+        Assert.assertTrue(consoleStub.isPrinted("Please Login First."));
     }
 
     @Test
     public void testPerformLogin() {
         ConsoleStub consoleStub = new ConsoleStub("1");
-        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
-        bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeUser();
-        bibliotecaProgram.InitializeMovie();
-        PerformLogin performLogin = new PerformLogin();
-        performLogin.performAction(consoleStub, bibliotecaProgram);
+        BibliotecaLibrary bibliotecaLibrary = new BibliotecaLibrary(consoleStub);
+        UserCollection userCollection =new UserCollection();
+        User user1 = new User("111-1111","Apass");
+        User user2 = new User("111-1112","Bpass");
+        User user3 = new User("111-1113","Cpass");
+
+        userCollection.addUser(user1);
+        userCollection.addUser(user2);
+        userCollection.addUser(user3);
+        Login login = new Login(consoleStub,userCollection, bibliotecaLibrary);
+        login.userAction();
         Assert.assertTrue(consoleStub.isPrinted("You are successfully logged in."));
     }
 
     @Test
-    public void testPerformGetDetails() {
+    public void testcheckLibraryNumber() {
         ConsoleStub consoleStub = new ConsoleStub("1");
-        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
-        bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeUser();
-        bibliotecaProgram.InitializeMovie();
-        PerformGetDetails performGetDetails = new PerformGetDetails();
-        performGetDetails.performAction(consoleStub, bibliotecaProgram);
+        User user1 = new User("111-1111","Apass");
+        CheckLibraryNumber checkLibraryNumber = new CheckLibraryNumber(consoleStub,user1);
+        checkLibraryNumber.userAction();
         Assert.assertTrue(consoleStub.isPrinted("Please talk to Librarian. Thank you."));
     }
 
     @Test
-    public void testPerformPrintBook() {
+    public void testPrintBook() {
         ConsoleStub consoleStub = new ConsoleStub("1");
-        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
-        bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeUser();
-        bibliotecaProgram.InitializeMovie();
-        PerformPrintBook performPrintBook = new PerformPrintBook();
-        performPrintBook.performAction(consoleStub, bibliotecaProgram);
+        BookCollection bookCollection = new BookCollection();
+        Book book1= new Book("Object-Oriented Analysis and Design","Brett D. McLaughlin","978-81-8404-221-4");
+        Book book2 = new Book("The Programming Language of Oracle","Ivan Bayross","81-8333-241-2");
+
+        bookCollection.addBook(book1);
+        bookCollection.addBook(book2);
+        PrintBooks performPrintBook = new PrintBooks(consoleStub,bookCollection);
+        performPrintBook.userAction();
         Assert.assertTrue(consoleStub.isPrinted("Object-Oriented Analysis and Design    Brett D. McLaughlin    978-81-8404-221-4"));
     }
 
     @Test
     public void testPerformPrintMovie() {
         ConsoleStub consoleStub = new ConsoleStub("1");
-        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
-        bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeUser();
-        bibliotecaProgram.InitializeMovie();
-        PerformPrintMovie performPrintMovie = new PerformPrintMovie();
-        performPrintMovie.performAction(consoleStub, bibliotecaProgram);
+        MovieCollection movieCollection = new MovieCollection();
+        Movie movie = new Movie("Dil Se",1998,"Mani Ratnam","9");
+        Movie movie1 = new Movie("Heroine",2012,"Madhur Bhandarkar","N/A");
+
+        movieCollection.addMovie(movie);
+        movieCollection.addMovie(movie1);
+        PrintMovies performPrintMovie = new PrintMovies(consoleStub,movieCollection);
+        performPrintMovie.userAction();
        Assert.assertTrue(consoleStub.isPrinted("Dil Se    1998    Mani Ratnam    9"));
     }
 
     @Test
     public void testPerformShowWarning() {
         ConsoleStub consoleStub = new ConsoleStub("1");
-        BibliotecaProgram bibliotecaProgram = new BibliotecaProgram();
-        bibliotecaProgram.InitializeBookLog();
-        bibliotecaProgram.InitializeUser();
-        bibliotecaProgram.InitializeMovie();
-        PerformShowWarning performShowWarning = new PerformShowWarning();
-        performShowWarning.performAction(consoleStub, bibliotecaProgram);
+        ShowWarning performShowWarning = new ShowWarning(consoleStub);
+        performShowWarning.userAction();
         Assert.assertTrue(consoleStub.isPrinted("Select a valid option!!"));
     }
 }

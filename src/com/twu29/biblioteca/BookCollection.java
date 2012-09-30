@@ -6,30 +6,38 @@ import java.util.List;
 
 public class BookCollection {
     List<Book> bookList;
+    List<Book> reservedList;
 
     public BookCollection() {
         bookList = new ArrayList<Book>();
+        reservedList = new ArrayList<Book>();
     }
 
-    public boolean addBook(Book book) {
+    public void addBook(Book book) {
         this.bookList.add(book);
-        return true;
     }
 
     public boolean searchBook(String userInput) {
-        for (Iterator i = bookList.iterator(); i.hasNext(); ) {
-            Book book1 = (Book) i.next();
+        for (int index = 0;index<bookList.size();index++ ) {
+            Book book1 = bookList.get(index);
             if (book1.matchTitle(userInput))
+            {
+                reserveBook(index);
                 return true;
+            }
         }
         return false;
     }
 
-    public boolean printBook(Console console) {
-        for (Iterator i = bookList.iterator(); i.hasNext(); ) {
-            Book book = (Book) i.next();
-            console.println(book.toString());
-        }
-        return true;  //To change body of created methods use File | Settings | File Templates.
+    private void reserveBook(int index) {
+        reservedList.add(bookList.remove(index));
+    }
+
+    public int count(){
+        return bookList.size();
+    }
+
+    public String bookInformation(int index){
+        return (bookList.get(index)).toString();
     }
 }

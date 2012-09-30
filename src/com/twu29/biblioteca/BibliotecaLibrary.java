@@ -9,16 +9,17 @@ import java.util.HashMap;
  * Time: 12:31 AM
  * To change this template use File | Settings | File Templates.
  */
-public class BibliotecaProgram {
-    User user;
+public class BibliotecaLibrary {
+    IUser user;
     private final BookCollection bookCollection;
     private final MovieCollection movieCollection;
     private final UserCollection userCollection;
-    UserMenu userMenu;
+    private Console console;
 
-    public BibliotecaProgram(){
-     userMenu = new UserMenu();
-     user = new User();
+
+    public BibliotecaLibrary(Console console){
+      user = new AnonymousUser();
+      this.console = console;
      bookCollection = new BookCollection();
      movieCollection = new MovieCollection();
      userCollection = new UserCollection();
@@ -86,54 +87,18 @@ public class BibliotecaProgram {
     }
 
 
-    public void StartLibrary(Console console){
-        userMenu.DisplayWelcomeNote(console);
-        userMenu.DisplayMenu(console);
-       String UserInput =userMenu.getUserInput(console,"Enter your choice: ");
-        performaction(UserInput,console);
+    public void StartLibrary(String userInput){
+        performaction(userInput);
     }
 
-    public void performaction(String UserInput,Console console) {
+    public void performaction(String UserInput) {
         HashMap<String,Action> generateAction= new HashMap<String,Action>();
-        generateAction.put("1", new PerformLogin());
-        generateAction.put("2",new PerformPrintBook());
-        generateAction.put("3",new PerformBookSelection());
-        generateAction.put("4",new PerformPrintMovie());
-        generateAction.put("5",new PerformGetDetails());
-        generateAction.put("6",new PerformShowWarning());
-
-
-        generateAction.get(UserInput).performAction(console, this);
-    }
-
-    public void login(Console console) {
-        userCollection.login(console,user);  //To change body of created methods use File | Settings | File Templates.
-    }
-
-    public void getDetails(Console console) {
-        if((user.toString() != null ) && ((user.isLoggedIn()) || userCollection.searchUser(user)) ){
-            console.println("Your username is: "+ user.toString());
-        }
-        else
-        {
-           console.println("Please talk to Librarian. Thank you.");
-        }
-    }
-
-    public boolean printMovie(Console console){
-       movieCollection.printMovie(console);
-        return true;
-    }
-
-    public boolean searchBook(String BookName){
-       return bookCollection.searchBook(BookName);
-    }
-
-    public String getUserInput(Console console,String message) {
-        return userMenu.getUserInput(console,message);
-    }
-
-    public boolean printBook(Console console) {
-       return bookCollection.printBook(console);
+        generateAction.put("1", new Login(console,userCollection,this));
+        generateAction.put("2",new PrintBooks(console,bookCollection));
+        generateAction.put("3",new ReserveBook(console,bookCollection,user));
+        generateAction.put("4",new PrintMovies(console,movieCollection));
+        generateAction.put("5",new CheckLibraryNumber(console,user));
+        generateAction.put("6",new ShowWarning(console));
+        (generateAction.get(UserInput)).userAction();
     }
 }

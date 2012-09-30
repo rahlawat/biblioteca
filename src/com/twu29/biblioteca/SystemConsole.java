@@ -11,9 +11,10 @@ import java.io.InputStreamReader;
  * Time: 12:53 AM
  * To change this template use File | Settings | File Templates.
  */
-public class SysConsole implements Console {
+public class SystemConsole implements Console {
     @Override
     public String readLine(String text) {
+        println(text);
         String inputLine = null;
         try {
             BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
